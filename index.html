@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nitco Tiles - Sri Tej Tiles & Interiors</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #0c5954;
+      --primary-light: rgba(15, 118, 110, 0.1);
+      --primary-lighter: rgba(15, 118, 110, 0.05);
+      --text-primary: #0f766e;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 4rem;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .animate-slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .animate-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Header Styles */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: var(--background);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .logo span {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 60;
+    }
+
+    .mobile-menu-toggle span {
+      position: relative;
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--foreground);
+      transition: var(--transition);
+    }
+
+    .mobile-menu-toggle span::before,
+    .mobile-menu-toggle span::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background-color: var(--foreground);
+      transition: var(--transition);
+    }
+
+    .mobile-menu-toggle span::before {
+      transform: translateY(-8px);
+    }
+
+    .mobile-menu-toggle span::after {
+      transform: translateY(8px);
+    }
+
+    .mobile-menu-toggle.active span {
+      background-color: transparent;
+    }
+
+    .mobile-menu-toggle.active span::before {
+      transform: rotate(45deg);
+    }
+
+    .mobile-menu-toggle.active span::after {
+      transform: rotate(-45deg);
+    }
+
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--background);
+      padding: 5rem 2rem 2rem;
+      z-index: 50;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-link {
+      font-size: 1.25rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav-link.active {
+      color: var(--text-primary);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-menu-toggle {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link.active {
+        color: var(--text-primary);
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 400px;
+      max-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero-slider {
+      height: 100%;
+    }
+
+    .hero-slide {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      max-width: 36rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease forwards 0.6s;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease forwards 0.9s;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 3.5rem;
+      }
+
+      .hero-description {
+        font-size: 1.25rem;
+      }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 6px rgba(15, 118, 110, 0.2);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(15, 118, 110, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-light);
+    }
+
+    .btn-lg {
+      padding: 0.875rem 2rem;
+      font-size: 1.125rem;
+    }
+
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-icon i {
+      font-size: 1.125rem;
+    }
+
+    /* Store Info Section */
+    .section {
+      padding: 3rem 0;
+    }
+
+    .section-alt {
+      background-color: var(--muted);
+    }
+
+    .card {
+      background-color: var(--background);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-5px);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .store-info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .store-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .icon-wrapper {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 9999px;
+      background-color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .info-item:hover .icon-wrapper {
+      transform: scale(1.1);
+      background-color: var(--primary);
+    }
+
+    .info-item:hover .icon-wrapper i {
+      color: white;
+    }
+
+    .icon-wrapper i {
+      color: var(--text-primary);
+      font-size: 1.75rem;
+      transition: var(--transition);
+    }
+
+    .info-content h3 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .info-content p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+
+    .info-content a {
+      color: var(--text-primary);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .info-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-header {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+
+    @media (min-width: 768px) {
+      .section-title {
+        margin-bottom: 0;
+      }
+
+      .section-title::after {
+        left: 0;
+        transform: none;
+      }
+    }
+
+    .view-all {
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .view-all:hover {
+      gap: 0.5rem;
+    }
+
+    /* Featured Collections */
+    .collections-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .collections-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .collections-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .collection-item {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      height: 100%;
+    }
+
+    .collection-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      aspect-ratio: 1 / 1;
+    }
+
+    .collection-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .collection-item:hover .collection-image {
+      transform: scale(1.1);
+    }
+
+    .collection-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      color: white;
+      opacity: 0.9;
+      transition: var(--transition);
+    }
+
+    .collection-item:hover .collection-overlay {
+      opacity: 1;
+    }
+
+    .collection-name {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+      transform: translateY(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .collection-item:hover .collection-name {
+      transform: translateY(0);
+    }
+
+    .collection-count {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      transform: translateY(10px);
+      transition: transform 0.3s ease 0.1s;
+    }
+
+    .collection-item:hover .collection-count {
+      transform: translateY(0);
+    }
+
+    /* Product Categories */
+    .tabs {
+      width: 100%;
+    }
+
+    .tabs-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .tabs-list {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .tab-trigger {
+      background-color: var(--background);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 0.5rem;
+      font-size: 0.875rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .tab-trigger:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .tab-trigger.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 6px rgba(15, 118, 110, 0.2);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    .product-item {
+      background-color: var(--background);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-item:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-item:hover .product-image {
+      transform: scale(1.1);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      z-index: 1;
+    }
+
+    .product-actions {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .product-item:hover .product-actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-action {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--foreground);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .product-action:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .product-name {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .product-item:hover .product-name {
+      color: var(--primary);
+    }
+
+    .product-price {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-top: auto;
+    }
+
+    .product-price .original {
+      text-decoration: line-through;
+      color: var(--muted-foreground);
+      font-size: 0.875rem;
+      font-weight: 400;
+      margin-right: 0.5rem;
+    }
+
+    /* Counter Section */
+    .counter-section {
+      background-color: var(--primary);
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+    }
+
+    .counter-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+    }
+
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+      .counter-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .counter-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .counter-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .counter-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .counter-label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* Testimonials */
+    .testimonials-slider {
+      overflow: hidden;
+      padding: 1.5rem 0;
+    }
+
+    .testimonial-slide {
+      height: auto;
+      padding: 1rem;
+    }
+
+    .testimonial-card {
+      background-color: var(--background);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      height: 100%;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-avatar {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary-light);
+    }
+
+    .testimonial-author {
+      flex-grow: 1;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+
+    .testimonial-title {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .testimonial-rating {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .testimonial-star {
+      color: #fbbf24;
+      font-size: 1rem;
+    }
+
+    .testimonial-content {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--muted-foreground);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .testimonial-content p {
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    .testimonial-content p::before,
+    .testimonial-content p::after {
+      content: '"';
+      font-size: 2rem;
+      color: var(--primary-light);
+      position: absolute;
+      font-family: serif;
+    }
+
+    .testimonial-content p::before {
+      left: -0.5rem;
+      top: -0.5rem;
+    }
+
+    .testimonial-content p::after {
+      right: -0.5rem;
+      bottom: -1rem;
+    }
+
+    .testimonial-date {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-top: auto;
+      text-align: right;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-form {
+      background-color: var(--background);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-info {
+      background-color: var(--primary);
+      color: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+    }
+
+    .contact-info-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-info-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .contact-info-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: white;
+    }
+
+    .contact-info-list {
+      margin-top: 2rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info-icon i {
+      font-size: 1.25rem;
+    }
+
+    .contact-info-text {
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .contact-info-text strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-social-link {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .contact-social-link:hover {
+      background-color: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background-color: var(--background);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      height: 4.5rem;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 768px) {
+      .bottom-nav {
+        display: none;
+      }
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-item.active::before {
+      width: 40%;
+    }
+
+    .nav-item i {
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .nav-item span {
+      font-size: 0.75rem;
+      transition: var(--transition);
+    }
+
+    .nav-item.active {
+      color: var(--text-primary);
+    }
+
+    .nav-item:active {
+      transform: scale(0.95);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--muted);
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      margin-bottom: 4.5rem;
+    }
+
+    @media (min-width: 768px) {
+      footer {
+        padding: 5rem 0 3rem;
+        margin-bottom: 0;
+      }
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-description {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-bottom: 1.5rem;
+      max-width: 25rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted-foreground);
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-heading {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-link a {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .footer-link a i {
+      font-size: 0.75rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-item i {
+      color: var(--primary);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 0.25rem;
+    }
+
+    .contact-text {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .footer-bottom a {
+      color: var(--primary);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.5rem;
+      width: 3rem;
+      height: 3rem;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 40;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    @media (min-width: 768px) {
+      .back-to-top {
+        bottom: 2rem;
+      }
+    }
+
+    /* Utility Classes */
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* Animations for scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="https://i.ibb.co/Qp1NKwM/nitco-logo.png" alt="Nitco Tiles Logo">
+        <span>Nitco Tiles</span>
+      </a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <span></span>
+      </button>
+      <nav class="desktop-nav">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#products" class="nav-link">Products</a>
+        <a href="#collections" class="nav-link">Collections</a>
+        <a href="#testimonials" class="nav-link">Reviews</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="#home" class="mobile-nav-link active">Home</a>
+      <a href="#products" class="mobile-nav-link">Products</a>
+      <a href="#collections" class="mobile-nav-link">Collections</a>
+      <a href="#testimonials" class="mobile-nav-link">Reviews</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="swiper hero-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide hero-slide">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Luxury Tiles Collection" class="hero-image">
+            <div class="hero-content">
+              <h1 class="hero-title">Sri Tej Tiles & Interiors</h1>
+              <p class="hero-description">Authorized Nitco Tiles Dealer in Maddilapalem, Visakhapatnam</p>
+              <div class="hero-cta">
+                <a href="#collections" class="btn btn-primary btn-lg btn-icon">
+                  Explore Collections <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide hero-slide">
+            <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Premium Bathroom Tiles" class="hero-image">
+            <div class="hero-content">
+              <h1 class="hero-title">Transform Your Space</h1>
+              <p class="hero-description">Discover our premium collection of tiles for every room in your home</p>
+              <div class="hero-cta">
+                <a href="#products" class="btn btn-primary btn-lg btn-icon">
+                  View Products <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide hero-slide">
+            <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Designer Kitchen Tiles" class="hero-image">
+            <div class="hero-content">
+              <h1 class="hero-title">Expert Design Consultation</h1>
+              <p class="hero-description">Our team of experts will help you choose the perfect tiles for your project</p>
+              <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary btn-lg btn-icon">
+                  Contact Us <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- Store Info -->
+    <section class="section">
+      <div class="container">
+        <div class="store-info-grid reveal">
+          <div class="info-item">
+            <div class="icon-wrapper">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-content">
+              <h3>Visit Our Store</h3>
+              <p>Plot No. 42, Maddilapalem Main Road, Near HDFC Bank, Visakhapatnam, Andhra Pradesh 530013</p>
+              <a href="https://maps.google.com" target="_blank">
+                Get Directions <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon-wrapper">
+              <i class="far fa-clock"></i>
+            </div>
+            <div class="info-content">
+              <h3>Opening Hours</h3>
+              <p>Monday - Saturday: 9:00 AM - 8:00 PM<br>Sunday: 10:00 AM - 6:00 PM</p>
+              <a href="#contact">
+                Contact Us <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon-wrapper">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="info-content">
+              <h3>Get In Touch</h3>
+              <p>Phone: +91 9876543210<br>Email: sritej@nitcotiles.com</p>
+              <a href="tel:+919876543210">
+                Call Now <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="section section-alt" id="collections">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Featured Collections</h2>
+          <a href="#" class="view-all">
+            View All Collections <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+        <div class="collections-grid reveal">
+          <a href="#" class="collection-item">
+            <div class="collection-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Luxury Marble" class="collection-image">
+              <div class="collection-overlay">
+                <h3 class="collection-name">Luxury Marble</h3>
+                <p class="collection-count">24 Products</p>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="collection-item">
+            <div class="collection-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wood Finish Tiles" class="collection-image">
+              <div class="collection-overlay">
+                <h3 class="collection-name">Wood Finish Tiles</h3>
+                <p class="collection-count">18 Products</p>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="collection-item">
+            <div class="collection-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bathroom Tiles" class="collection-image">
+              <div class="collection-overlay">
+                <h3 class="collection-name">Bathroom Tiles</h3>
+                <p class="collection-count">32 Products</p>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="collection-item">
+            <div class="collection-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kitchen Tiles" class="collection-image">
+              <div class="collection-overlay">
+                <h3 class="collection-name">Kitchen Tiles</h3>
+                <p class="collection-count">27 Products</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="section" id="products">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Shop By Category</h2>
+          <a href="#" class="view-all">
+            View All Products <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+        <div class="tabs reveal">
+          <div class="tabs-list">
+            <button class="tab-trigger active" data-tab="floor">Floor Tiles</button>
+            <button class="tab-trigger" data-tab="wall">Wall Tiles</button>
+            <button class="tab-trigger" data-tab="outdoor">Outdoor</button>
+            <button class="tab-trigger" data-tab="decorative">Decorative</button>
+          </div>
+          <div class="tab-content active" id="floor-tab">
+            <div class="products-grid">
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">New</span>
+                  <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Marble Floor Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Marble</span>
+                  <h3 class="product-name">Italian Carrara Marble</h3>
+                  <p class="product-price">₹1,250/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Porcelain Floor Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Porcelain</span>
+                  <h3 class="product-name">Premium Porcelain Tile</h3>
+                  <p class="product-price"><span class="original">₹950/sqft</span> ₹850/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vitrified Floor Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Vitrified</span>
+                  <h3 class="product-name">Double Charged Vitrified</h3>
+                  <p class="product-price">₹750/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">Sale</span>
+                  <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wooden Floor Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Wood Look</span>
+                  <h3 class="product-name">Wooden Finish Tile</h3>
+                  <p class="product-price"><span class="original">₹1,050/sqft</span> ₹950/sqft</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="tab-content" id="wall-tab">
+            <div class="products-grid">
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ceramic Wall Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Ceramic</span>
+                  <h3 class="product-name">Glossy Ceramic Wall Tile</h3>
+                  <p class="product-price">₹550/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">New</span>
+                  <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Designer Wall Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Designer</span>
+                  <h3 class="product-name">3D Designer Wall Tile</h3>
+                  <p class="product-price">₹850/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Subway Wall Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Subway</span>
+                  <h3 class="product-name">Classic Subway Tile</h3>
+                  <p class="product-price">₹450/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">Sale</span>
+                  <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mosaic Wall Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Mosaic</span>
+                  <h3 class="product-name">Glass Mosaic Tile</h3>
+                  <p class="product-price"><span class="original">₹950/sqft</span> ₹750/sqft</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="tab-content" id="outdoor-tab">
+            <div class="products-grid">
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Outdoor Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Patio</span>
+                  <h3 class="product-name">Anti-Skid Patio Tile</h3>
+                  <p class="product-price">₹650/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Deck Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Deck</span>
+                  <h3 class="product-name">Wooden Deck Tile</h3>
+                  <p class="product-price">₹850/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">New</span>
+                  <img src="https://images.unsplash.com/photo-1600607688066-890987f18a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pool Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Pool</span>
+                  <h3 class="product-name">Swimming Pool Tile</h3>
+                  <p class="product-price">₹950/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Garden Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Garden</span>
+                  <h3 class="product-name">Garden Path Tile</h3>
+                  <p class="product-price">₹550/sqft</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="tab-content" id="decorative-tab">
+            <div class="products-grid">
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">Premium</span>
+                  <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Decorative Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Decorative</span>
+                  <h3 class="product-name">Moroccan Pattern Tile</h3>
+                  <p class="product-price">₹1,150/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Artistic Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Artistic</span>
+                  <h3 class="product-name">Hand-Painted Ceramic</h3>
+                  <p class="product-price">₹1,250/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <span class="product-badge">Limited</span>
+                  <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vintage Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Vintage</span>
+                  <h3 class="product-name">Vintage Pattern Tile</h3>
+                  <p class="product-price">₹950/sqft</p>
+                </div>
+              </a>
+              <a href="#" class="product-item">
+                <div class="product-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mosaic Tile" class="product-image">
+                  <div class="product-actions">
+                    <span class="product-action"><i class="far fa-eye"></i></span>
+                    <span class="product-action"><i class="far fa-heart"></i></span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <span class="product-category">Mosaic</span>
+                  <h3 class="product-name">Luxury Mosaic Tile</h3>
+                  <p class="product-price">₹1,350/sqft</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="counter-section">
+      <div class="container">
+        <div class="counter-grid reveal">
+          <div class="counter-item">
+            <div class="counter-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="counter-number" data-count="15">0</div>
+            <div class="counter-label">Years of Experience</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-icon">
+              <i class="fas fa-smile"></i>
+            </div>
+            <div class="counter-number" data-count="5000">0</div>
+            <div class="counter-label">Happy Customers</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <div class="counter-number" data-count="750">0</div>
+            <div class="counter-label">Projects Completed</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-icon">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            <div class="counter-number" data-count="1200">0</div>
+            <div class="counter-label">Tile Varieties</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Customer Reviews</h2>
+          <a href="#" class="view-all">
+            View All Reviews <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+        <div class="testimonials-slider swiper reveal">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma" class="testimonial-avatar">
+                  <div class="testimonial-author">
+                    <h4 class="testimonial-name">Rahul Sharma</h4>
+                    <p class="testimonial-title">Interior Designer</p>
+                    <div class="testimonial-rating">
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-content">
+                  <p>"I've been working with Sri Tej Tiles for over 5 years now for all my interior design projects. Their collection is unmatched in Visakhapatnam, and the quality of Nitco tiles they provide is exceptional. The staff is knowledgeable and always helps me find the perfect tiles for my clients' needs."</p>
+                </div>
+                <div class="testimonial-date">March 15, 2023</div>
+              </div>
+            </div>
+            <div class="swiper-slide testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel" class="testimonial-avatar">
+                  <div class="testimonial-author">
+                    <h4 class="testimonial-name">Priya Patel</h4>
+                    <p class="testimonial-title">Homeowner</p>
+                    <div class="testimonial-rating">
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="far fa-star testimonial-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-content">
+                  <p>"Recently renovated my entire house and got all the tiles from Sri Tej Tiles. The variety they have is amazing, and the prices are quite reasonable compared to other stores. The installation service they recommended was also very professional. The only small issue was the delivery took a day longer than promised."</p>
+                </div>
+                <div class="testimonial-date">February 8, 2023</div>
+              </div>
+            </div>
+            <div class="swiper-slide testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Amit Kumar" class="testimonial-avatar">
+                  <div class="testimonial-author">
+                    <h4 class="testimonial-name">Amit Kumar</h4>
+                    <p class="testimonial-title">Architect</p>
+                    <div class="testimonial-rating">
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-content">
+                  <p>"As an architect, I need to work with reliable suppliers who offer quality products. Sri Tej Tiles has been my go-to place for all tile requirements. Their imported Italian marble collection is simply outstanding. The owner is very knowledgeable and helps me select the right materials for different projects. Highly recommended!"</p>
+                </div>
+                <div class="testimonial-date">January 22, 2023</div>
+              </div>
+            </div>
+            <div class="swiper-slide testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Sneha Reddy" class="testimonial-avatar">
+                  <div class="testimonial-author">
+                    <h4 class="testimonial-name">Sneha Reddy</h4>
+                    <p class="testimonial-title">Real Estate Developer</p>
+                    <div class="testimonial-rating">
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                      <i class="fas fa-star testimonial-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-content">
+                  <p>"We've been sourcing tiles for our apartment projects from Sri Tej Tiles for the past 3 years. Their bulk pricing is competitive, and they always deliver on time. The quality of Nitco tiles is consistent, which is crucial for our business. Their after-sales service is also excellent. They're our trusted partners for all tiling needs."</p>
+                </div>
+                <div class="testimonial-date">April 5, 2023</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="section-title">Get In Touch</h2>
+        </div>
+        <div class="contact-grid reveal">
+          <div class="contact-form">
+            <h3 class="form-title">Send Us a Message</h3>
+            <form id="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name" class="form-label">Your Name</label>
+                  <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+              </div>
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" class="form-control" placeholder="Enter subject">
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" class="form-control" rows="5" placeholder="How can we help you?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+          </div>
+          <div class="contact-info">
+            <div class="contact-info-content">
+              <h3 class="contact-info-title">Contact Information</h3>
+              <p>Feel free to reach out to us with any questions or inquiries. Our team is always ready to assist you.</p>
+              <div class="contact-info-list">
+                <div class="contact-info-item">
+                  <div class="contact-info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div class="contact-info-text">
+                    <strong>Our Location</strong>
+                    Plot No. 42, Maddilapalem Main Road, Near HDFC Bank, Visakhapatnam, Andhra Pradesh 530013
+                  </div>
+                </div>
+                <div class="contact-info-item">
+                  <div class="contact-info-icon">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <div class="contact-info-text">
+                    <strong>Call Us</strong>
+                    +91 9876543210
+                  </div>
+                </div>
+                <div class="contact-info-item">
+                  <div class="contact-info-icon">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div class="contact-info-text">
+                    <strong>Email Us</strong>
+                    sritej@nitcotiles.com
+                  </div>
+                </div>
+                <div class="contact-info-item">
+                  <div class="contact-info-icon">
+                    <i class="far fa-clock"></i>
+                  </div>
+                  <div class="contact-info-text">
+                    <strong>Opening Hours</strong>
+                    Monday - Saturday: 9:00 AM - 8:00 PM<br>
+                    Sunday: 10:00 AM - 6:00 PM
+                  </div>
+                </div>
+              </div>
+              <div class="contact-social">
+                <a href="#" class="contact-social-link">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="contact-social-link">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="contact-social-link">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="contact-social-link">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation - Mobile Only -->
+  <div class="bottom-nav">
+    <a href="#home" class="nav-item active">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#products" class="nav-item">
+      <i class="fas fa-th-large"></i>
+      <span>Products</span>
+    </a>
+    <a href="#" class="nav-item">
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    </a>
+    <a href="#contact" class="nav-item">
+      <i class="fas fa-phone"></i>
+      <span>Contact</span>
+    </a>
+    <a href="#" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Account</span>
+    </a>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="https://i.ibb.co/Qp1NKwM/nitco-logo.png" alt="Nitco Tiles Logo">
+            <span class="text-xl font-bold">Nitco Tiles</span>
+          </div>
+          <p class="footer-description">
+            Sri Tej Tiles & Interiors - Authorized dealer of Nitco Tiles in Maddilapalem, Visakhapatnam. We offer a wide range of premium tiles for all your interior and exterior needs.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li class="footer-link"><a href="#products"><i class="fas fa-chevron-right"></i> Products</a></li>
+            <li class="footer-link"><a href="#collections"><i class="fas fa-chevron-right"></i> Collections</a></li>
+            <li class="footer-link"><a href="#testimonials"><i class="fas fa-chevron-right"></i> Reviews</a></li>
+            <li class="footer-link"><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-heading">Products</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#"><i class="fas fa-chevron-right"></i> Floor Tiles</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-chevron-right"></i> Wall Tiles</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-chevron-right"></i> Outdoor Tiles</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-chevron-right"></i> Decorative Tiles</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-chevron-right"></i> Bathroom Tiles</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-heading">Contact Us</h3>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="contact-text">
+              Plot No. 42, Maddilapalem Main Road, Near HDFC Bank, Visakhapatnam, Andhra Pradesh 530013
+            </span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <span class="contact-text">+91 9876543210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span class="contact-text">sritej@nitcotiles.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="current-year"></span> Sri Tej Tiles & Interiors. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #e25555;"></i> by <a href="#">WebDesignPro</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Hero Slider
+    const heroSwiper = new Swiper('.hero-slider', {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+    });
+
+    // Testimonials Slider
+    const testimonialSwiper = new Swiper('.testimonials-slider', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+
+    // Tab functionality
+    const tabTriggers = document.querySelectorAll('.tab-trigger');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        // Remove active class from all triggers and contents
+        tabTriggers.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked trigger
+        trigger.classList.add('active');
+        
+        // Show corresponding content
+        const tabId = trigger.getAttribute('data-tab');
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+      });
+    });
+
+    // Bottom navigation active state
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('section[id]');
+
+    function setActiveNavItem() {
+      let scrollY = window.scrollY;
+      
+      sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          navItems.forEach(item => {
+            item.classList.remove('active');
+            if(item.getAttribute('href') === `#${sectionId}`) {
+              item.classList.add('active');
+            }
+          });
+          
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+          
+          document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    function toggleBackToTopButton() {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    }
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Scroll reveal animation
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+
+    // Counter animation
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter-number');
+      const speed = 200;
+      
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+        
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(() => animateCounters(), 1);
+        } else {
+          counter.innerText = target;
+        }
+      });
+    }
+
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Simple validation
+        if (!name || !email || !phone || !message) {
+          alert('Please fill in all required fields');
+          return;
+        }
+        
+        // Here you would normally send the data to a server
+        alert(`Thank you for your message, ${name}! We will get back to you soon.`);
+        contactForm.reset();
+      });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Event listeners
+    window.addEventListener('scroll', () => {
+      setActiveNavItem();
+      toggleBackToTopButton();
+      revealOnScroll();
+    });
+
+    window.addEventListener('load', () => {
+      setActiveNavItem();
+      toggleBackToTopButton();
+      revealOnScroll();
+      
+      // Start counter animation when the counter section is in view
+      const counterSection = document.querySelector('.counter-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      if (counterSection) {
+        observer.observe(counterSection);
+      }
+    });
+  </script>
+</body>
+</html>
